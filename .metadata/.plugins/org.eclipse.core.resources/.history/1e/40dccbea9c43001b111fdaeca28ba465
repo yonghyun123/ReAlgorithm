@@ -8,10 +8,7 @@ public class Basic {
 	public static Scanner sc;
 	
 	public static void main(String[] args) {
-//		solving1000();
-//		solving1330();
-//		solving2752();
-		solving2753();
+		solving1000();
 	}
 	
 	public static void solving1000(){
