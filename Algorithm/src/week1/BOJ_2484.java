@@ -33,14 +33,10 @@ public class BOJ_2484 {
 	
 	//2,000원+(2개가 나온 눈)*500원+(또 다른 2개가 나온 눈)*500원
 	public static int calculation(int sameCount, int maxFirstNum, int maxSecondNum){
-//		System.out.println("=====In calculation input====");
-//		System.out.println("=====sameCount===="+ sameCount);
-//		System.out.println("=====maxFirstNum===="+ maxFirstNum);
-//		System.out.println("=====maxSecondNum===="+ maxSecondNum);
 		//같은숫자가 2개씩 존재할때
 		int resultSum = 0;
 		if(maxSecondNum != 0){
-			if(sameCount == 2){
+			if(sameCount == 1){
 				resultSum = 2000 + (maxFirstNum*500) + (maxSecondNum*500);
 			}
 		}else{
@@ -66,39 +62,38 @@ public class BOJ_2484 {
 			int maxFirstNum = 0;
 			int maxSecondNum = 0;
 			int sameCount = 0;
+			int maxCount = 0;
 			Arrays.sort(arr[i]); //first sorting
 			
-			for(int j = 1; j < arr[i].length; j++){
-				if(arr[i][j-1] ==  arr[i][j]){
-					
-					if(j == 3 && sameCount == 1){
-						maxSecondNum = arr[i][j];
-					}else{
-						maxFirstNum = arr[i][j];	
+			for(int j = 0; j < arr[i].length-1; j++){
+				sameCount = 0;
+				for(int k = j+1; k < arr[i].length; k++){
+					if(arr[i][j] ==  arr[i][k]){
+						sameCount += 1;
 					}
-					sameCount += 1;
+				}
+				
+				if(maxCount < sameCount){
+					maxCount = sameCount;
+					maxFirstNum = arr[i][j];
+				} else {
+					if(maxCount == 1 && sameCount == 1){
+						maxSecondNum = arr[i][j];
+					}
 					
 				}
-				if(j == 3 && sameCount == 0){
-					maxFirstNum = arr[i][j];
+				
+				if(maxCount == 0){
+					maxFirstNum = arr[i][3];
 				}
 			}
 			
-//			System.out.println("===============input===============");
-//			System.out.println("sameCount = " + sameCount);
-//			System.out.println("maxFirstNum = " + maxFirstNum);
-//			System.out.println("maxSecondNum = " + maxSecondNum);
-//			System.out.println("sorted Arrays ==================== ");
-//			for(int j = 0; j < arr[i].length; j++){
-//				System.out.print(arr[i][j] + " ");
-//			}
-//			System.out.println("");
-//			System.out.println("===============input End===============");
-
-			resultAns = Math.max(calculation(sameCount, maxFirstNum, maxSecondNum), resultAns);
+//			System.out.println("maxCount:"+maxCount);
+//			System.out.println("maxFirstNum:"+maxFirstNum);
+//			System.out.println("maxSecondNum:"+maxSecondNum);
+			resultAns = Math.max(calculation(maxCount, maxFirstNum, maxSecondNum), resultAns);
 			
 		}
-		
 	}
 
 	public static void main(String[] args) {
