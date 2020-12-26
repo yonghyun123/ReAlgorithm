@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public class BOJ_2798 {
 	
-	public static Scanner sc;
+	
 	public static int[] inputArr;
 	public static long resultNum;
 	public static long result;
@@ -44,20 +44,47 @@ public class BOJ_2798 {
 		
 	}
 	
+	public static void looginMethods(){
+		int breakflag = 0;
+		result = 0;
+		for(int i = 0; i < inputArr.length; i++){
+			for(int j = i+1; j < inputArr.length; j++){
+				for(int k = j+1; k < inputArr.length; k++){
+					if( (result < (inputArr[i] + inputArr[j] + inputArr[k])) && 
+						((inputArr[i] + inputArr[j] + inputArr[k]) <= resultNum)){
+						result = (inputArr[i] + inputArr[j] + inputArr[k]);
+					}
+					if(result == resultNum){
+						breakflag = 1;
+						break;
+					}
+				}
+				if(breakflag == 1) break;
+				
+			}
+			if(breakflag ==1) break;
+		}
+		
+		//System.out.println(result);
+	}
+	
 	public static void main(String[] args) {
 		
-		sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		
 		int inputNum = sc.nextInt();
 		resultNum = sc.nextInt();
 		inputArr = new int[inputNum];
+		result = 0;
 		
 		for(int i = 0; i < inputNum; i++){
 			inputArr[i] = sc.nextInt();
 		}
 		
 		
-		calculationOfResult(0, 0, 0);
+		
+//		calculationOfResult(0, 0, 0);
+		looginMethods();
 		System.out.println(result);
 		
 	}
