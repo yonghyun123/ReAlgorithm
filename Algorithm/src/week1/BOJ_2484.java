@@ -35,22 +35,18 @@ public class BOJ_2484 {
 	public static int calculation(int sameCount, int maxFirstNum, int maxSecondNum){
 		//같은숫자가 2개씩 존재할때
 		int resultSum = 0;
-		if(maxSecondNum != 0){
-			if(sameCount == 1){
-				resultSum = 2000 + (maxFirstNum*500) + (maxSecondNum*500);
-			}
-		}else{
-			if(sameCount == 0){
-				resultSum = maxFirstNum*100;
-			}
-			else if(sameCount == 1){
-				resultSum = 1000 + (maxFirstNum*100);
-			}else if(sameCount == 2){
-				resultSum =  10000 + (maxFirstNum*1000);
-			} else{
-				resultSum =  50000 + (maxFirstNum*5000);
-			}
+		if(sameCount == 3){
+			resultSum =  50000 + (maxFirstNum*5000);
+		} else if(sameCount == 2){
+			resultSum =  10000 + (maxFirstNum*1000);
+		} else if(sameCount == 1 && maxSecondNum != 0){
+			resultSum = 2000 + (maxFirstNum*500) + (maxSecondNum*500);
+		} else if(sameCount == 1){
+			resultSum = 1000 + (maxFirstNum*100);
+		} else {
+			resultSum = maxFirstNum*100;
 		}
+		
 		return resultSum;
 	}
 	
@@ -80,7 +76,6 @@ public class BOJ_2484 {
 					if(maxCount == 1 && sameCount == 1){
 						maxSecondNum = arr[i][j];
 					}
-					
 				}
 				
 				if(maxCount == 0){
@@ -88,7 +83,7 @@ public class BOJ_2484 {
 				}
 			}
 			
-//			System.out.println("maxCount:"+maxCount);
+//			System.out.println("maxCount:"+maxCount);1 2 3 4
 //			System.out.println("maxFirstNum:"+maxFirstNum);
 //			System.out.println("maxSecondNum:"+maxSecondNum);
 			resultAns = Math.max(calculation(maxCount, maxFirstNum, maxSecondNum), resultAns);
