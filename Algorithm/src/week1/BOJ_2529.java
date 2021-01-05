@@ -31,10 +31,6 @@ public class BOJ_2529 {
 			recursionMax(0,String.valueOf(i),0);
 		}
 		
-		for(int i = 0; i < 10; i++){
-			recursionMin(0,String.valueOf(i),0);
-		}
-		
 		System.out.println(resultMaxNum);
 		if(inputNum == String.valueOf(resultMinNum).length()){
 			System.out.println("0"+resultMinNum);	
@@ -49,38 +45,10 @@ public class BOJ_2529 {
 			long nextNum = Long.parseLong(nextStr);
 			if(resultMaxNum < nextNum){
 				resultMaxNum = nextNum;
-				return;
 			}
-		}
-		//기저조건 
-		if(idx >= baseNum.length-1){
-			return;
-		}
-		
-
-		for(int i = 0; i < baseNum.length; i++){
-			if(!nextStr.contains(i+"")){
-				if("<".equals(inputArr[depth])){
-					if(Integer.parseInt(nextStr.substring(nextStr.length()-1)) < baseNum[i]){
-						String temp = nextStr+baseNum[i];
-						recursionMax(idx+1, temp, depth+1);
-					}
-				}else if(">".equals(inputArr[depth])){
-					if(Integer.parseInt(nextStr.substring(nextStr.length()-1)) > baseNum[i]){
-						String temp = nextStr+baseNum[i];
-						recursionMax(idx+1, temp, depth+1);
-					}
-				}
-			}
-		}
-	}
-	
-	public static void recursionMin(int idx, String nextStr, int depth){
-		if(depth == inputNum){
-			long nextNum = Long.parseLong(nextStr);
+			
 			if(resultMinNum > nextNum){
 				resultMinNum = nextNum;
-				
 			}
 			return;
 		}
@@ -95,16 +63,15 @@ public class BOJ_2529 {
 				if("<".equals(inputArr[depth])){
 					if(Integer.parseInt(nextStr.substring(nextStr.length()-1)) < baseNum[i]){
 						String temp = nextStr+baseNum[i];
-						recursionMin(idx+1, temp, depth+1);
+						recursionMax(idx+1, temp, depth+1);
 					}
 				}else if(">".equals(inputArr[depth])){
 					if(Integer.parseInt(nextStr.substring(nextStr.length()-1)) > baseNum[i]){
 						String temp = nextStr+baseNum[i];
-						recursionMin(idx+1, temp, depth+1);
+						recursionMax(idx+1, temp, depth+1);
 					}
 				}
 			}
 		}
 	}
-
 }
