@@ -56,7 +56,7 @@ public class BOJ_15649 {
         if(depth > r) return;
 
         for(int i = 0; i < n; i++){
-            if(!visited[i]){
+            if(!visited[i]){  // 
                 visited[i] = true;
                 result[depth] = i+1;
                 permutation(result, visited, depth+1);
