@@ -52,9 +52,7 @@ public class BOJ_1463 {
             }
             if(i % 2 == 0){
                 dp[i] = Math.min( (1 + dp[i/2]), dp[i]);
-            } 
-            
-            
+            }
         }
         System.out.println(dp[inputNum]);
         

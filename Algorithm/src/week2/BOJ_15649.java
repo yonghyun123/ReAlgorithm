@@ -27,6 +27,7 @@ import java.util.StringTokenizer;
     4 2
     4 3
  */
+
 public class BOJ_15649 {
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static StringTokenizer st;
