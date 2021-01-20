@@ -15,8 +15,8 @@ import java.util.Scanner;
  */
 public class BOJ_4375 {
 
-    // private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private static Scanner sc = new Scanner(System.in);
+     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    // private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
          
@@ -36,9 +36,9 @@ public class BOJ_4375 {
         // 위에 소스로 EOF 처리가 가능 
         //
 
-
-        while(sc.hasNextInt()){
-            int inputNum = sc.nextInt();
+        String input = "";
+        while((input = br.readLine()) != null){
+            int inputNum = Integer.parseInt(input);
             int divided = 1;
             int reminder = 99999999;
             int result = 0;
