@@ -66,7 +66,6 @@ public class BOJ_10972 {
             int idx = 0;
             for(int i = breakIdx; i < n; i++){
                 if((inputArr[breakIdx] < inputArr[i]) && inputArr[i] < overNum){
-                    
                     overNum = inputArr[i];
                     idx = i;
                 }
