@@ -13,7 +13,12 @@ import java.util.StringTokenizer;
  * 
  * 4 2
  * 
- * 1 2 1 3 1 4 2 3 2 4 3 4
+ * 1 2 
+ * 1 3 
+ * 1 4 
+ * 2 3
+ * 2 4
+ * 3 4
  */
 public class BOJ_15650 {
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
