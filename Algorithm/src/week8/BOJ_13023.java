@@ -4,12 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
-import javafx.scene.layout.Border;
 
 /**
  * BOJ 알고리즘 캠프에는 총 N명이 참가하고 있다. 사람들은 0번부터 N-1번으로 번호가 매겨져 있고, 일부 사람들은 친구이다.
@@ -50,7 +47,7 @@ public class BOJ_13023 {
         board = new ArrayList[n];
         visited = new boolean[n];
 
-        for(int i = 0 ; i <relationCnt; i++){
+        for(int i = 0 ; i <n; i++){
             board[i] = new ArrayList<>();
         }
 
@@ -58,6 +55,7 @@ public class BOJ_13023 {
             st = new StringTokenizer(br.readLine());
             int row = Integer.parseInt(st.nextToken());
             int col = Integer.parseInt(st.nextToken());
+            
             board[row].add(col);
             board[col].add(row);
         }
@@ -105,9 +103,10 @@ public class BOJ_13023 {
             answerFlag = 1;
             return;
         }
-        for(int i = 0; i < visited.length; i++){
-            if(!visited[i] && board[start][i] == 1){
-                dfs(i, depth + 1);
+        for(int i = 0; i < board[start].size(); i++){
+            int next = board[start].get(i);
+            if(!visited[next] ){
+                dfs(next, depth + 1);
                 if(answerFlag == 1) break;
             }
         }
@@ -119,15 +118,6 @@ public class BOJ_13023 {
             if(visited[i] == false) return 0;
         }
         return 1;
-    }
-
-    public static void printArr(){
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++){
-                System.out.print(board[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
 
     public static void printVisited(){
