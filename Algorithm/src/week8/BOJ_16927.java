@@ -21,8 +21,6 @@ public class BOJ_16927 {
         col = Integer.parseInt(st.nextToken());
         rotate = Integer.parseInt(st.nextToken());
         board = new int[row][col];
-        int[][] tempBoard = new int[row][col];
-        int[][] resultBoard = new int[row][col];
         dp = new ArrayList<>(); 
 
         for(int i = 0; i < row; i++){

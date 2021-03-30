@@ -47,7 +47,5 @@ public class BOJ_16192 {
         }
         // for(int i = 0; i<5; i++){
             System.out.println(dp[n]);
-        // }
-
     }
 }

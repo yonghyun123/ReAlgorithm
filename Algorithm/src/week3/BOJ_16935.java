@@ -35,23 +35,15 @@ public class BOJ_16935 {
     private static StringTokenizer st;
     private static int[][] inputArray;
     private static int[][] resultArray;
-    private static int n,m,methodCnt,max;
+    private static int n,m,methodCnt;
     private static int[] methodsArray;
-    private static boolean isReverse;
-
     public static void main(String[] args) throws Exception {
         st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
         methodCnt = Integer.parseInt(st.nextToken());
-        isReverse = false;
         
         inputArray = new int[n][m];
-        if(n > m){
-            max = n;
-        } else {
-            max = m;
-        }
 
         
 

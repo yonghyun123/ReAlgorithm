@@ -21,7 +21,7 @@ public class BOJ_14999 {
     private static StringTokenizer st;
     private static int[][] board;
     private static int[] dice;
-    private static int row, col, startX, startY, calCount;
+    private static int row, col, startX, startY;
 
     public static void main(String[] args) throws IOException {
         st = new StringTokenizer(br.readLine());
@@ -30,7 +30,6 @@ public class BOJ_14999 {
             col = Integer.parseInt(st.nextToken());
             startX = Integer.parseInt(st.nextToken());
             startY = Integer.parseInt(st.nextToken());
-            calCount = Integer.parseInt(st.nextToken());
         }
         board = new int[row][col];
         dice = new int[6];

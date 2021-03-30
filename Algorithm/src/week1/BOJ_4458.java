@@ -3,7 +3,6 @@ package week1;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 /*각 줄의 첫글자를 대문자로 바꾼뒤 출력한다.
  * 

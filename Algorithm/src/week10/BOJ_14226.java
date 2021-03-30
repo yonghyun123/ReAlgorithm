@@ -41,7 +41,7 @@ public class BOJ_14226 {
         int[] tempElement = {screenEmotCount, clipCount, timeCount};
         q.add(tempElement);
 
-         int i = 0;
+        
         while(!q.isEmpty()){
             int currScreenCount = q.peek()[0];
             int currClipCount = q.peek()[1];

@@ -22,6 +22,7 @@ public class BOJ_2798 {
 	public static int[] inputArr;
 	public static long resultNum;
 	public static long result;
+	public static Scanner sc;
 	
 	public static void calculationOfResult(int idx, int prevVal, long depth){
 		
@@ -70,7 +71,7 @@ public class BOJ_2798 {
 	
 	public static void main(String[] args) {
 		
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		
 		int inputNum = sc.nextInt();
 		resultNum = sc.nextInt();

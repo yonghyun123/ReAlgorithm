@@ -43,7 +43,6 @@ public class BOJ_2966 {
 		
 		sc = new Scanner(System.in);
 		
-		int num = sc.nextInt();
 		String inputStr = sc.next();
 	
 		

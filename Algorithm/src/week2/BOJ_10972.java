@@ -11,9 +11,8 @@ public class BOJ_10972 {
     private static StringTokenizer st;
 
     private static int n;
-    private static int[] perm;
+
     private static int[] inputArr;
-    private static boolean[] visited;
     private static boolean isContinue, isAns;
     private static boolean isBreak;
     private static StringBuffer sb;
@@ -23,9 +22,7 @@ public class BOJ_10972 {
         st = new StringTokenizer(br.readLine());
         sb = new StringBuffer();
 
-        perm = new int[n];
         inputArr = new int[n];
-        visited = new boolean[n];
         isContinue = false;
         isBreak = false;
         int breakIdx = 0;

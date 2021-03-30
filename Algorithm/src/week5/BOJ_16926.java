@@ -18,8 +18,6 @@ public class BOJ_16926 {
         col = Integer.parseInt(st.nextToken());
         rotate = Integer.parseInt(st.nextToken());
         board = new int[row][col];
-        int[][] tempBoard = new int[row][col];
-        int[][] resultBoard = new int[row][col];
 
         for(int i = 0; i < row; i++){
             st = new StringTokenizer(br.readLine());

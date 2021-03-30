@@ -23,17 +23,16 @@ public class BOJ_14890 {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static StringTokenizer st;
     private static int[][] board;
-    private static int leanCnt, n;
-    private static boolean[] visited;
+    private static int n;
+
 
     public static void main(String[] args) throws IOException {
         st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
-        leanCnt = Integer.parseInt(st.nextToken());
         board = new int[n][n];
-        visited = new boolean[n];
+    
 
-        int result = 0;
+    
 
         for(int i = 0; i < n; i++){
             st = new StringTokenizer(br.readLine());
@@ -46,7 +45,6 @@ public class BOJ_14890 {
 
         //Arrays row calculate
         for(int i = 0; i < n; i++){
-            int[] tempArr = board[i].clone();
             // if(isCorrect(tempArr)) result += 1;
         }
         // printBoard();

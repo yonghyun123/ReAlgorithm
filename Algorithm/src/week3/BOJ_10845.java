@@ -3,7 +3,6 @@ package week3;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 /**
@@ -25,7 +24,7 @@ public class BOJ_10845 {
         for(int i = 0; i < n; i++){
             st = new StringTokenizer(br.readLine());
             String inputStr = st.nextToken();
-            int result = -99999;  
+        
             switch(inputStr){   
                 case "push": 
                     q.add(Integer.parseInt(st.nextToken()));
