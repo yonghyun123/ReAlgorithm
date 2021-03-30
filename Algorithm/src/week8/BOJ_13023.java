@@ -44,7 +44,7 @@ public class BOJ_13023 {
         st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
         relationCnt = Integer.parseInt(st.nextToken());
-        board = new ArrayList[n];
+        //board = new ArrayList[n];
         visited = new boolean[n];
 
         for(int i = 0 ; i <n; i++){

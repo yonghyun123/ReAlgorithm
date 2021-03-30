@@ -1,5 +1,4 @@
 package week14;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -96,7 +95,7 @@ public class BOJ_15662 {
         }
     
         int result = 0;
-        
+
         for (int j = 0; j < T; j++) {
             result += inputList.get(j).get(0);
         }
