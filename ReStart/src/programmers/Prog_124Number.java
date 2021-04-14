@@ -28,38 +28,21 @@ public class Prog_124Number {
             String[] dp = new String[4];
             StringBuilder sb = new StringBuilder();
 
-            if(N == 3) sb.append(4) ;
-            else if(N == 2) sb.append(2) ;
-            else if(N == 1) sb.append(1) ;
-            else{
+            dp[0] = "4";
+            dp[1] = "1";
+            dp[2] = "2";
+            while(N != 0){
+                int divider = N / 3;
+                int divided = N % 3;
+                N = divider;
+                if(divided == 0){
+                    N--;
+                }
 
+                sb.append(dp[divided]);
+                
             }
             
-            if(N % 3 == 0){
-                N -= 3;
-                dp[0] = "4";
-                dp[1] = "1";
-                dp[2] = "2";
-                while(N != 0){
-                    int divider = N / 3;
-                    int divided = N % 3;
-                    sb.append(dp[divided]);
-                    N = divider;
-                }
-            } else{
-                dp[0] = "4";
-                dp[1] = "1";
-                dp[2] = "2";
-                while(N != 0){
-                    int divider = N / 3;
-                    int divided = N % 3;
-                    sb.append(dp[divided]);
-                    N = divider;
-                }
-            }
-
-            
-
             System.out.println(sb.reverse());
         
     }
