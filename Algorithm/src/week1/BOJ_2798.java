@@ -52,7 +52,7 @@ public class BOJ_2798 {
 			for(int j = i+1; j < inputArr.length; j++){
 				for(int k = j+1; k < inputArr.length; k++){
 					if( (result < (inputArr[i] + inputArr[j] + inputArr[k])) && 
-						((inputArr[i] + inputArr[j] + inputArr[k]) <= resultNum)){
+						((inputArr[i] + inputArr[j] + inputArr[k]) <= resultNum)) {
 						result = (inputArr[i] + inputArr[j] + inputArr[k]);
 					}
 					if(result == resultNum){
