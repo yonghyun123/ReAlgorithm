@@ -20,7 +20,7 @@ public class BOJ_15655 {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static StringTokenizer st;
 
-    private static int N, R;
+    private static int N, R; 
     private static List<Integer> result;
     private static boolean[] visited;
     private static int[] board;
