@@ -3,6 +3,7 @@ package week30;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import java.util.stream.Collectors;
 
 /**
@@ -39,7 +40,7 @@ new_id에 나타날 수 있는 특수문자는 -_.~!@#$%^&*()=+[{]}:?,<>/ 로 �
 public class ProgRecommendId {
     public static void main(String[] args) {
         ProgRecommendId.Solution solution = new ProgRecommendId().new Solution();
-        System.out.println(solution.solution("...!@BaT#*..y.abcdefghijklm"));
+        System.out.println(solution.solution("abcdefghijklmn.p"));
     }
 
     public class Solution{
@@ -51,6 +52,11 @@ public class ProgRecommendId {
             String answer = "";
             answer = step1(new_id);
             answer = step2(answer);
+            answer = step3(answer);
+            answer = step4(answer);
+            answer = step5(answer);
+            answer = step6(answer);
+            answer = step7(answer);
     
             return answer;
         }
@@ -69,20 +75,89 @@ public class ProgRecommendId {
             }
 
             for(int i = tempId.size()-1; i >=0; i--){
-                if(Pattern.matches(regExprAlphabet, tempId.get(i))) continue;
-                if(Pattern.matches(regExprNumber,   tempId.get(i))) continue;
-                if("-".equals(tempId.get(i))) continue;
-                if("_".equals(tempId.get(i))) continue;
-                if(".".equals(tempId.get(i))) continue;
-                tempId.remove(tempId.get(i));
+                if(!tempId.isEmpty()){
+                    if(Pattern.matches(regExprAlphabet, tempId.get(i))) continue;
+                    if(Pattern.matches(regExprNumber,   tempId.get(i))) continue;
+                    if("-".equals(tempId.get(i))) continue;
+                    if("_".equals(tempId.get(i))) continue;
+                    if(".".equals(tempId.get(i))) continue;
+                    tempId.remove(tempId.get(i));
+                }
             }
             //java 8 문법 적용
             String step2Id = tempId.stream().map(item -> String.valueOf(item)).collect(Collectors.joining());
-            // String step2Id = "";
-            // for(String item : tempId){
-            //     step2Id += item;
-            // }
             return step2Id;
+        }
+
+        public String step3(String newId){
+            List<String> tempId = new ArrayList<>();
+
+            for(int i = 0; i < newId.length(); i++){
+                tempId.add(String.valueOf(newId.charAt(i)));
+            }
+
+            
+            for(int i = tempId.size()-1; i >0; i--){
+                if(!tempId.isEmpty()){
+                    if(".".equals(tempId.get(i)) && ".".equals(tempId.get(i-1))){
+                        tempId.remove(i);
+                    }
+                }
+            }
+            String step3Id = tempId.stream().map(item -> String.valueOf(item)).collect(Collectors.joining());
+
+            return step3Id;
+        }
+
+        public String step4(String newId){
+            List<String> tempId = new ArrayList<>();
+            String step4Id = "";
+            for(int i = 0; i < newId.length(); i++){
+                tempId.add(String.valueOf(newId.charAt(i)));
+            }
+            if(!tempId.isEmpty()){
+                if(".".equals(tempId.get(0))){
+                    tempId.remove(0);
+                } 
+            }
+
+            if(!tempId.isEmpty()){
+                if(".".equals(tempId.get(tempId.size()-1))){
+                    tempId.remove(tempId.size()-1);
+                }   
+            }
+            step4Id = tempId.stream().map(item -> String.valueOf(item)).collect(Collectors.joining());
+        
+            return step4Id;
+        }
+
+        public String step5(String newId){
+            if("".equals(newId)){
+                newId += "a";
+            }
+            return newId;
+        }
+
+        public String step6(String newId){
+            if(newId.length() >= 16){
+                newId = newId.substring(0, 15);
+                if(".".equals(String.valueOf(newId.charAt(14)))){
+                    newId = newId.substring(0, 14);
+                    
+                }
+            }
+
+            return newId;
+        }
+
+        public String step7(String newId){
+            if(newId.length() <= 2){
+                while(newId.length() < 3){
+                    char tempChar = newId.charAt(newId.length()-1);
+                    newId += tempChar;
+                }
+            }
+            return newId;
         }
     }
 }
