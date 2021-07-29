@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-
 /**
  * 인구이동
  * N×N크기의 땅이 있고, 땅은 1×1개의 칸으로 나누어져 있다. 각각의 땅에는 나라가 하나씩 존재하며, 
@@ -45,7 +44,7 @@ public class BOJ_16234 {
     private static int[][] board,afterBoard;
     private static int[] dirRow = {0,1,0,-1};
     private static int[] dirCol = {1,0,-1,0};
-    private static boolean[][] visited;
+    private static boolean[][] visited,afterVisited;
 
     public static void main(String[] args) throws IOException {
         st = new StringTokenizer(br.readLine());
@@ -64,6 +63,7 @@ public class BOJ_16234 {
         board = new int[N][N];
         afterBoard = new int[N][N];
         visited = new boolean[N][N];
+        afterVisited = new boolean[N][N];
         result = 0;
 
         for(int i = 0; i < N; i++) {
@@ -71,21 +71,25 @@ public class BOJ_16234 {
             int j = 0;
             while(st.hasMoreTokens()){
                 board[i][j] = Integer.parseInt(st.nextToken());
+                afterBoard[i][j] = board[i][j];
                 j++;
             }
         }
 
         for(int i = 0; i < N; i++){
             for(int j = 0; j < N; j++){
-                if(!visited[i][j]){
-                    int[] pos = {i,j};
-                    bfs(pos);
-                }
+                int[] pos = {i,j};
+                bfs(pos);   
             }
 
-            calulateBoard();//계산을 먼저하고 
+            if(isDiffVisited()){
+                calulateBoard();//계산을 먼저하고 
+            }
+            printBoard();
+            System.out.println();
             if(isDiffBoard()){
                 copyBoard();//계산된 인구 배열로 변경
+                copyVisited();
                 i = 0;
                 result += 1;
             } else {
@@ -106,68 +110,7 @@ public class BOJ_16234 {
         System.out.println(result);   
     }
 
-    /**
-     * test method
-     */
-    public static void printBoard(){
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                System.out.print(board[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    public static void printVisited(){
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                System.out.print(visited[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    public static void calulateBoard(){
-        int trueCnt = 0;
-        int totalValue = 0;
-        
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                if(visited[i][j]){
-                    trueCnt += 1;
-                    totalValue += board[i][j];
-                }
-            }
-        }
-        int avgValue = totalValue / trueCnt;
-
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                if(visited[i][j]){
-                    afterBoard[i][j] = avgValue;
-                }else{
-                    afterBoard[i][j] = board[i][j];
-                }
-            }
-        }
-    }
-    public static void copyBoard(){
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                board[i][j] = afterBoard[i][j];
-            }
-        }
-    }
-
-    public static boolean isDiffBoard(){
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                if(board[i][j] != afterBoard[i][j]) return true;
-            }
-        }
-        return false;
-    }
-
+    
     public static void bfs(int[] startPos){
         Queue<int[]> q = new LinkedList<>();
 
@@ -202,6 +145,94 @@ public class BOJ_16234 {
             visited[firstRow][firstCol] = false;
         }
     }
+ 
+    public static void calulateBoard(){
+        int trueCnt = 0;
+        int totalValue = 0;
+        
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                if(visited[i][j]){
+                    trueCnt += 1;
+                    totalValue += board[i][j];
+                }
+            }
+        }
+        int avgValue = totalValue / trueCnt;
+
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                if(visited[i][j]){
+                    afterBoard[i][j] = avgValue;
+                }else{
+                    afterBoard[i][j] = board[i][j];
+                }
+            }
+        }
+    }
+    public static void copyBoard(){
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                board[i][j] = afterBoard[i][j];
+            }
+        }
+    }
+
+    public static void copyVisited(){
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                afterVisited[i][j] = visited[i][j];
+            }
+        }
+    }
+
+    public static boolean isDiffBoard(){
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                if(board[i][j] != afterBoard[i][j]) return true;
+            }
+        }
+        return false;
+    }
+
+
+    public static boolean isDiffVisited(){
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                if(visited[i][j] != afterVisited[i][j]) return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isVisited(){
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                if(visited[i][j]) return true;
+            }
+        }
+        return false;
+    }
+
+    public static void printBoard(){
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printVisited(){
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                System.out.print(visited[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+
 
     public static boolean isMove(int curNode, int nextNode){
         int resultValue = Math.abs(curNode-nextNode);
