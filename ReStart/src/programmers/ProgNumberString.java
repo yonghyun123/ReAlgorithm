@@ -36,26 +36,35 @@ public class ProgNumberString {
     class Solution{
         List<String> numberList;
         public int solution(String s) {
-            numberList = new ArrayList<String>();
-            numberList.add("zero");
-            numberList.add("one");
-            numberList.add("two");
-            numberList.add("three");
-            numberList.add("four");
-            numberList.add("five");
-            numberList.add("six");
-            numberList.add("seven");
-            numberList.add("eight");
-            numberList.add("nine");
+            // numberList = new ArrayList<String>();
+            // numberList.add("zero");
+            // numberList.add("one");
+            // numberList.add("two");
+            // numberList.add("three");
+            // numberList.add("four");
+            // numberList.add("five");
+            // numberList.add("six");
+            // numberList.add("seven");
+            // numberList.add("eight");
+            // numberList.add("nine");
 
-            for(int i = 0; i < numberList.size(); i++){
-                // System.out.println(numberList.get(i));
-                s = s.replaceAll(numberList.get(i), i+"");
-                // System.out.println(s);
-            }
-            int answer = Integer.parseInt(s);
-
-
+            // for(int i = 0; i < numberList.size(); i++){
+            //     // System.out.println(numberList.get(i));
+            //     s = s.replaceAll(numberList.get(i), i+"");
+            //     // System.out.println(s);
+            // }
+            int answer = 0;
+            
+            String[] temp = {
+                "000","def"
+            };
+            // for(int i = 0; i <temp.length; i++){
+            //     System.out.println(temp[i]);
+            // }
+            temp[0] = temp[0].replace(temp[0].charAt(0), '1');
+            System.out.println(temp[0].charAt(0));
+            System.out.println(temp[0].charAt(1));
+            System.out.println(temp[0]);
             return answer;
         }
     }
