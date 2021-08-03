@@ -58,10 +58,11 @@ public class ProgNumberString {
             String[] temp = {
                 "000","def"
             };
+            String aaa = "aaa";
             // for(int i = 0; i <temp.length; i++){
             //     System.out.println(temp[i]);
             // }
-            temp[0] = temp[0].replace(temp[0].charAt(0), '1');
+            StringBuilder sb = new StringBuilder("abcd");
             System.out.println(temp[0].charAt(0));
             System.out.println(temp[0].charAt(1));
             System.out.println(temp[0]);
