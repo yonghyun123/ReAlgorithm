@@ -36,14 +36,14 @@ public class ex03 {
             int totalTime = 0;
             int min_page = 100001;
             
-            q.add(data[0]);
+            // q.add(data[0]);
             int maxTime = 0;
             for (int i = 0; i < data.length; i++) {
                 maxTime = maxTime + data[i][1];
             }
 
             while (/*!q.isEmpty()  || resultList.size() != data.length*/ maxTime != totalTime) {
-                for (int i = 1; i < data.length; i++) {
+                for (int i = 0; i < data.length; i++) {
                     // 해당 작업 끝나기 전에 요청시각에 맞는 작업 waitingQ에 적재
                     if (totalTime == data[i][1]) {
                         if(min_page > data[i][2]) min_page = data[i][2];
