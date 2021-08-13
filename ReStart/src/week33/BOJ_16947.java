@@ -3,6 +3,7 @@ package week33;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -48,24 +49,31 @@ public class BOJ_16947 {
 
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static StringTokenizer st;
-    private static int[][] board;
+    private static ArrayList<ArrayList<Integer>> board;
     private static boolean[]  visited;
     private static int[] cycleVisisted;
+    private static StringBuilder sb;
     
     private static int numOfNode;
 
     public static void main(String[] args) throws NumberFormatException, IOException {
         numOfNode = Integer.parseInt(br.readLine());
-        board = new int[numOfNode][numOfNode];
+        board = new ArrayList<>();
         cycleVisisted = new int[numOfNode];
         visited = new boolean[numOfNode];
+        sb = new StringBuilder();
         
         for(int i = 0; i < numOfNode; i++){
+            board.add(new ArrayList<>());
+        }
+
+        for(int i = 0; i < numOfNode; i++){
+            
             st = new StringTokenizer(br.readLine());
 			int m = Integer.parseInt(st.nextToken());
-			int n = Integer.parseInt(st.nextToken());
-			board[m-1][n-1] = 1;
-			board[n-1][m-1] = 1;
+            int n = Integer.parseInt(st.nextToken());
+            board.get(m-1).add(n-1);
+            board.get(n-1).add(m-1);
         }
 
         //사이클이 존재하는지 판단
@@ -85,14 +93,14 @@ public class BOJ_16947 {
             }
         }
         
-        for(int i = 0; i < cycleVisisted.length; i++){
+        for(int i = 0; i < numOfNode; i++){
             if(cycleVisisted[i] == -1){
-                System.out.print("0 ");
+                sb.append("0 ");
             }else{
-                System.out.print(cycleVisisted[i]+" ");
+                sb.append(cycleVisisted[i]+ " ");
             }
-
         }
+        System.out.println(sb.toString());
     }
 
     public static void initVisited(){
@@ -105,22 +113,20 @@ public class BOJ_16947 {
 
         visited[curNode] = true;
         
-        for(int i = 0; i < numOfNode; i++){
+        for(int i : board.get(curNode)){
             // if(i == curNode) continue;
-            if(board[curNode][i] == 1){
                 
-                if(!visited[i]){
-                    // System.out.println("IN VISITED cno="+curNode+" pano="+parentNode+" i="+i);
-                    if(findCycle(i, curNode, startNode)){
-                        cycleVisisted[i] = -1;
-                        return true;
-                    };
-                    
-                } else if(i == startNode && i != parentNode){
-                    // System.out.println("IN FINAL cno="+curNode+" pano="+parentNode+" i="+i);
+            if(!visited[i]){
+                // System.out.println("IN VISITED cno="+curNode+" pano="+parentNode+" i="+i);
+                if(findCycle(i, curNode, startNode)){
                     cycleVisisted[i] = -1;
                     return true;
-                }
+                };
+                
+            } else if(i == startNode && i != parentNode){
+                // System.out.println("IN FINAL cno="+curNode+" pano="+parentNode+" i="+i);
+                cycleVisisted[i] = -1;
+                return true;
             }
         }
         return false;
@@ -148,9 +154,9 @@ public class BOJ_16947 {
                 break;
             }
 
-            for(int i = 0; i < numOfNode; i++){
+            for(int i : board.get(curNode)){
                 if(i == curNode) continue;
-                if(!visited[i] && board[curNode][i] == 1){
+                if(!visited[i]){
                     int nextNode = i;
                     int nextDepth = curDepth+1;
                     int[] nextEl = {nextNode, nextDepth};
