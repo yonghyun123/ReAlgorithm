@@ -53,18 +53,11 @@ public class ProgColoringBook {
             return answer;
         }
 
-        public void initVisited(){
-            for(int i = 0; i < row; i++){
-                for(int j = 0; j < col; j++){
-                    visited[i][j] = false;
-                }
-            }
-        }
 
         public void bfs(int [][]picture, int startRow, int startCol, int startValue){
             Queue<int[]> q = new LinkedList<>();
 
-            visited[startRow][startValue] = true;
+            visited[startRow][startCol] = true;
             maxSize += 1;
             int[] startPos = {startRow, startCol, startValue};
             q.add(startPos);
@@ -82,6 +75,7 @@ public class ProgColoringBook {
                     if(nextRow < 0 || nextRow >= row || nextCol < 0 || nextCol >= col) continue;
                     if(!visited[nextRow][nextCol] && picture[nextRow][nextCol] == startValue){
                         visited[nextRow][nextCol] = true;
+                        // System.out.println("nr"+nextRow+", nc"+nextCol+", sv"+startValue);
                         maxSize += 1;
                         int[] nextPos = {nextRow, nextCol, curValue};
                         q.add(nextPos);
@@ -89,7 +83,7 @@ public class ProgColoringBook {
 
                 }
             }
-            System.out.println(maxSize);
+            // System.out.println(maxSize);
             
         }
     }
