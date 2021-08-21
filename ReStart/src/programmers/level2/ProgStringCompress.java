@@ -40,7 +40,6 @@ public class ProgStringCompress {
                     sliceStr = s.substring(i, i+sliceCnt);
                 }
                 
-                System.out.println(sliceStr);
     
 
                 if(sliceStr.equals(beforeStr)){
@@ -55,7 +54,6 @@ public class ProgStringCompress {
                 beforeStr = sliceStr;
             }
            
-            System.out.println(resultSliceStr);
             return resultSliceStr.trim().length();
         }
     }
