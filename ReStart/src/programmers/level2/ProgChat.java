@@ -125,7 +125,7 @@ public class ProgChat {
                         resultList.add(userId + "님이 나갔습니다.");
                     }
                 }
-                System.out.println(resultList);
+                // System.out.println(resultList);
             }
             answer = new String[resultList.size()];
             int i = 0;
