@@ -2,7 +2,6 @@ package programmers.level2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -81,27 +80,28 @@ public class ProgChat {
         };
 
         String[] result = solution.solution(temp);
-        Arrays.stream(result).forEach(System.out::println);
+        //java 8 
+         Arrays.stream(result).forEach(System.out::println);
     }
 
     class Solution {
 
-        // private Map<String,String> userMap = new HashMap<>();
-        private ArrayList<ArrayList<String>> resultMapList = new ArrayList<>();
+        
+        private ArrayList<String> resultList = new ArrayList<>();
+        private Map<String,String> userNickMap = new HashMap<>();
+        
         private StringTokenizer st;
-
 
         public String[] solution(String[] record) {
             String[] answer = {};
             for(String item : record){;
                 st = new StringTokenizer(item," ");
-                String resultStr = "";
+                
                 //
                 while(st.hasMoreTokens()){
                     String stmts = "";
                     String userId = "";
                     String nickName = "";
-                    boolean breakFlag = false;
 
                     stmts = st.nextToken();
 
@@ -115,93 +115,25 @@ public class ProgChat {
                     
                     //Enter일때, 
                     if("Enter".equals(stmts)){
-                        resultStr = "님이 들어왔습니다.";
-                        // 리스트가 비어있을때, 
-                        // userid, resultString 이런식으로 저장될 자료구조
-                        ArrayList<String> tempList = new ArrayList<>();
-                        resultStr = nickName + resultStr;
-                        tempList.add(userId);
-                        tempList.add(resultStr);
-                        resultMapList.add(tempList);
-                    
-                        for(ArrayList<String> itemList : resultMapList){
-                            //맵에 기존 아이디가 존재한다면
-                            if(userId.equals(itemList.get(0))){
-                                //닉네임자르기
-                                String beforeResult = itemList.get(1);
-                                String newResult = "";
-                                int breakIdx = 0;
-                                for(int i = 0; i < beforeResult.length(); i++){
-                                    if(String.valueOf(beforeResult.charAt(i)).equals("님")){
-                                        breakIdx = i;
-                                        break;
-                                    }
-                                }
-                                newResult = beforeResult.substring(breakIdx);
-                                itemList.remove(itemList.size()-1);
-                                resultStr = nickName + newResult;
-                                itemList.add(resultStr);
-                            }
-                        }
+                        userNickMap.put(userId, nickName);
+                        resultList.add(userId + "님이 들어왔습니다.");
+                    //Change일때,
                     } else if("Change".equals(stmts)){
-                        for(ArrayList<String> itemList : resultMapList){
-                            //맵에 기존 아이디가 존재한다면
-                            if(userId.equals(itemList.get(0))){
-                                //닉네임자르기
-                                String beforeResult = itemList.get(1);
-                                String newResult = "";
-                                int breakIdx = 0;
-                                for(int i = 0; i < beforeResult.length(); i++){
-                                    if(String.valueOf(beforeResult.charAt(i)).equals("님")){
-                                        breakIdx = i;
-                                        break;
-                                    }
-                                }
-                                newResult = beforeResult.substring(breakIdx);
-                                itemList.remove(itemList.size()-1);
-                                resultStr = nickName + newResult;
-                                itemList.add(resultStr);
-                                breakFlag = true;
-                            }
-                        }
+                        userNickMap.put(userId, nickName);
+                    //Leave일때,
                     } else {
-                        resultStr = "님이 나갔습니다.";
-                        // 리스트가 비어있을때, 
-                        // userid, resultString 이런식으로 저장될 자료구조
-                        ArrayList<String> tempList = new ArrayList<>();
-                        resultStr = nickName + resultStr;
-                        tempList.add(userId);
-                        tempList.add(resultStr);
-                        resultMapList.add(tempList);
-
-                        for(ArrayList<String> itemList : resultMapList){
-                            //맵에 기존 아이디가 존재한다면
-                            if(userId.equals(itemList.get(0))){
-                                //닉네임자르기
-                                String beforeResult = itemList.get(1);
-                                String newResult = "";
-                                int breakIdx = 0;
-                                for(int i = 0; i < beforeResult.length(); i++){
-                                    if(String.valueOf(beforeResult.charAt(i)).equals("님")){
-                                        breakIdx = i;
-                                        break;
-                                    }
-                                }
-                                newResult = beforeResult.substring(breakIdx);
-                                itemList.remove(itemList.size()-1);
-                                resultStr = nickName + newResult;
-                                itemList.add(resultStr);
-                                breakFlag = true;
-                            }
-                        }
-                    } 
+                        resultList.add(userId + "님이 나갔습니다.");
+                    }
                 }
+                System.out.println(resultList);
             }
-            answer = new String[resultMapList.size()];
+            answer = new String[resultList.size()];
             int i = 0;
-            for(ArrayList<String> item : resultMapList){
-                answer[i] = item.get(1);
-                i++;
+            for(String item: resultList){
+                int idx = item.indexOf("님");
+                String beforeUserId = item.substring(0, idx);
+                item = item.replace(beforeUserId, userNickMap.get(beforeUserId));
+                answer[i++] = item;
             }
             return answer;
         }
