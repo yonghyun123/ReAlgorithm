@@ -1,6 +1,8 @@
 package programmers.level1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 
 /***
@@ -14,51 +16,40 @@ public class ReferJobs {
     public static void main(String[] args) {
         
         ReferJobs.Solution solution = new ReferJobs().new Solution();
-        int[] arr = {4,4,4,3,3};
+        int[] arr = {1,1,3,3,0,1,1};
 
         
         // Stream.of(solution.solution(arr)).forEach(System.out::print);
         int[] aaa = solution.solution(arr);
-        // Arrays.stream(aaa).forEach(v -> System.out.println(v));
-        for(int i = 0 ; i < aaa.length; i++){
-            System.out.println(aaa[i]);
-        }
+        Arrays.stream(aaa).forEach(v -> System.out.print(v));
+        System.out.println();
+        // for(int i = 0 ; i < aaa.length; i++){
+        //     System.out.println(aaa[i]);
+        // }
     }
 
     public class Solution {
 
         public ArrayList<Integer> resultList = new ArrayList<>();
         public int[] solution(int []arr) {
-           
-            
+              
             // [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
-            for(int i = 0; i < arr.length-1; i++){
-                if(arr[i] == arr[i+1]){
-                    if(resultList.isEmpty()){
-                        resultList.add(arr[i]);
-                    } else {
-                        if(resultList.get(resultList.size()-1).equals(arr[i])) continue;
-                        else {
-                            resultList.add(arr[i]);
-                        }
-                    }
+            for(int i = 0; i < arr.length; i++){
+                if(resultList.isEmpty()){
+                    resultList.add(arr[i]);
                 } else {
-                    
-                    if(resultList.isEmpty()){
-                        resultList.add(arr[i]);    
+                    if(resultList.get(resultList.size()-1).equals(arr[i])){
+                        continue;
                     } else {
-                        resultList.add(arr[i+1]);
+                        resultList.add(arr[i]);
                     }
                 }
-            }
-            int[] answer = new int[resultList.size()];
-            int idx = 0;
-            for(int a : resultList){
-                answer[idx++] = a;
+
             }
 
-    
+            int[] answer = resultList.stream().mapToInt((v) -> (v)).toArray();
             return answer;
+            
         }
     }
 }
