@@ -1,5 +1,8 @@
 package programmers.level1;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 
 /**
  * array의 각 element 중 divisor로 나누어 떨어지는 값을 오름차순으로 정렬한 배열을 반환하는 함수, solution을 작성해주세요.
@@ -29,14 +32,22 @@ public class dividerArray {
     public static void main(String[] args) {
         dividerArray.Solution solution = new dividerArray().new Solution();
         int[] arr = {5, 9, 7, 10};
-        int divisor = 5;
-        solution.solution(arr, divisor);
+        int divisor = 11;
+        int[] answer = solution.solution(arr, divisor);
+        System.out.println(answer[0]);
 
     }
 
     class Solution {
         public int[] solution(int[] arr, int divisor) {
             int[] answer = {};
+            
+            // Stream<int[]> a = Stream.of(arr).filter(x -> x));
+            answer = Arrays.stream(arr).filter(x -> x % divisor == 0).sorted().toArray();
+            if(answer.length == 0){
+                answer = new int[1];
+                answer[0] = -1;
+            }
             return answer;
         }
     }
