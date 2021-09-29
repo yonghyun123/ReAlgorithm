@@ -2,12 +2,12 @@ package programmers.level2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
+
 import java.util.Collections;
-import java.util.Currency;
+
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Stream;
+
 
 public class ProgMenuRenewal {
     public static void main(String[] args) {
