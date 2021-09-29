@@ -43,6 +43,8 @@ public class dividerArray {
             int[] answer = {};
             
             // Stream<int[]> a = Stream.of(arr).filter(x -> x));
+            
+            //더 깔끔하게 하고 싶다..
             answer = Arrays.stream(arr).filter(x -> x % divisor == 0).sorted().toArray();
             if(answer.length == 0){
                 answer = new int[1];
