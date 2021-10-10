@@ -1,4 +1,7 @@
 package programmers.level2;
+
+import java.util.ArrayList;
+
 /**
  * ows x columns 크기인 행렬이 있습니다. 행렬에는 1부터 rows x columns까지의 숫자가 한 줄씩 순서대로 적혀있습니다. 
  * 이 행렬에서 직사각형 모양의 범위를 여러 번 선택해,
@@ -21,11 +24,12 @@ public class ProgRotateArray {
     
     public static void main(String[] args) {
         ProgRotateArray.Solution solution = new ProgRotateArray().new Solution();
-        int row = 6;
-        int col = 6;
+        int row = 100;
+        int col = 97;
         int[][] query = {
-            {2,2,5,4},{3,3,6,6},{5,1,6,3}
+            {1,1,100,97}
         };
+        // Arrays.stream(solution.solution(row, col, query)).forEach(v -> System.out.println(v)); 
         solution.solution(row, col, query);
     }
 
@@ -33,12 +37,13 @@ public class ProgRotateArray {
     class Solution {
 
         public int[][] originBoard, copyBoard;
-        
+        public ArrayList<Integer> resultValue;
         public int[] solution(int row, int col, int[][] queries) {
-            int[] answer = {};
+            
             int value = 1;
             originBoard = new int[row][col];
             copyBoard   = new int[row][col];
+            resultValue = new ArrayList<>();
 
             for(int i = 0; i < row; i++){
                 for(int j = 0; j < col; j++){
@@ -50,22 +55,24 @@ public class ProgRotateArray {
             }
 
             
-            printArr(originBoard);
             
             for(int i = 0; i < queries.length; i++){
-                rotate(queries[i]);    
+                resultValue.add(rotate(queries[i]));    
                 copyArr(copyBoard,originBoard);
             }
             
             printArr(originBoard);
             
+            
+            
+            int[] answer = resultValue.stream().mapToInt(x -> x).toArray();
 
             return answer;
         }
 
         public void copyArr(int[][] copyBoard, int[][] originBoard){
             for(int i = 0; i < copyBoard.length; i++){
-                for(int j = 0; j < copyBoard.length; j++){
+                for(int j = 0; j < copyBoard[i].length; j++){
                     copyBoard[i][j] = originBoard[i][j];
                 }
             }
@@ -87,7 +94,7 @@ public class ProgRotateArray {
 
             //right
             for(int i = x1; i < x2; i++){
-                minResult = Math.min(minResult, copyBoard[i][y2];);
+                minResult = Math.min(minResult, copyBoard[i][y2]);
                 originBoard[i+1][y2] = copyBoard[i][y2];
             }
 
