@@ -1,6 +1,8 @@
 package programmers.level2;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
@@ -34,8 +36,23 @@ public class ProgTuple {
     
     public static void main(String[] args) {
         ProgTuple.Solution solution = new ProgTuple().new Solution();
-        String s = "{{20,111},{111}}";
+        String s = "{{2,1,3,4},{2},{2,1,3},{2,1}}";
         solution.solution(s);
+        // String korean = "한글";
+        // byte[] str2;
+        // try {
+        //     str2 = korean.getBytes("UTF-16");
+
+        //     for(int i = 0; i < str2.length; i++){
+        //         System.out.print(str2[i] + " ");
+        //     }
+        // } catch (UnsupportedEncodingException e) {
+            
+        //     e.printStackTrace();
+        // }
+        // System.out.println(korean.length());
+
+
     }
     // 2-21-213-2134
     //{1,2,3},{2,1},{1,2,4,3},{2}
@@ -64,7 +81,9 @@ public class ProgTuple {
             }
 
             // 자른 문자열 길이로 정렬
-            allTupleList.sort((o1, o2) -> o1.length() - o2.length());
+            allTupleList.sort((o1, o2) -> {
+                return o1.compareTo(o2);
+            });
             
             for(String item: allTupleList){
                 String[] seperatedStr = item.split(",");

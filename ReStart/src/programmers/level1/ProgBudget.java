@@ -46,7 +46,7 @@ public class ProgBudget {
         public int solution(int[] d, int budget) {
             int answer = 0;
             Arrays.sort(d);
-
+            int[] t = {5,4,3,2,1};
             for(int i = 0; i < d.length; i++){
 
                 if(budget-d[i] >= 0){
