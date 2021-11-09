@@ -21,15 +21,16 @@ public class Main {
 
         dp = new int[N];
 
-        for(int i = 1; i <= N/2; i++){
-            for(int j = i; j < N; j ++){
-                dp[0] = i;
-                dp[1] = j;
+        for(int i = 1; i < K; i++){
+            for(int j = i; j < K; j ++){
+                dp[0] = i; //초기값 셋팅
+                dp[1] = j; //초기값 셋팅
+                //DP 점화식
                 for(int k = 0; k < N-2; k++){
                     dp[k+2] = dp[k+1] + dp[k];
                 }
                 if(dp[N-1] == K){
-                    breakFlag = true;
+                    breakFlag = true; // Get Answer
                     break;
                 } 
             }
