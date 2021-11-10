@@ -6,6 +6,7 @@ public class GenericWildcardSample {
         WildcardGeneric<String> gen = new WildcardGeneric<>();
         sample.genericMethod(gen,"ddd");    
     }
+    //메서드 타입에서 T 제네릭 사용을 봐야함
     public <T> void genericMethod(WildcardGeneric<T> c, T data){
         c.setWildcard(data);
         
