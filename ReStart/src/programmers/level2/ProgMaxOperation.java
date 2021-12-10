@@ -53,7 +53,7 @@ public class ProgMaxOperation {
         private long result = 0;
 
         public long solution(String expression) {
-            long answer = 0;
+            
             result = min;
 
             String numStr = "";
@@ -70,15 +70,15 @@ public class ProgMaxOperation {
             numList.add(Long.parseLong(numStr));
 
             permutation(0);
-            System.out.println(result);
-            return answer;
+            
+            return result;
         }
 
         public void permutation(int depth){
             if(depth == OP_COUNT){
                 // Arrays.stream(newOpList).forEach(v -> System.out.print(v + " "));
-                result = Math.max(calculate(newOpList), result);
                 // 계산로직 
+                result = Math.max(calculate(newOpList), result);
                 return;
             }
 
@@ -112,16 +112,11 @@ public class ProgMaxOperation {
                             nextNum = tempNumList.get(j) * tempNumList.get(j+1);
                             break;
                         }
-
-
                         tempNumList.remove(j+1);
                         tempNumList.set(j, nextNum);
                         tempInputOpList.remove(j);
                         j -= 1;
-
-
                     }
-                    
                 }
             }
             
