@@ -1,20 +1,21 @@
 package programmers.level2;
 
-import java.math.BigDecimal;
+
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class ProgNewClustering {
     public static void main(String[] args) {
         ProgNewClustering.Solution solution = new ProgNewClustering().new Solution();
-        System.out.println(solution.solution("aa1+aa2", "AAAA12")); 
+        System.out.println(solution.solution("E=M*C^2", "e=m*c^2")); 
 
      
     }
 
     class Solution {
-        private static final String pattern = "^[0-9a-zA-Z]*$";
+        private static final String pattern = "^[a-zA-Z]*$";
         private final List<String> firstList = new ArrayList<>();
         private final List<String> secondList = new ArrayList<>();
         
@@ -39,18 +40,21 @@ public class ProgNewClustering {
 
             //합집합 만들기
             for(String item: firstList){
-                for(int i = 0; i < secondList.size(); i++){
-                    //같다면
-                    if(secondList.contains(item)){
-                        secondList.remove(item);
-                        intersectionList.add(item);
-                    }   
-                }
+                //같다면
+                if(secondList.contains(item)){
+                    intersectionList.add(item);
+                    secondList.remove(item);
+                }   
             }
             firstList.addAll(secondList);
 
+
+            if(firstList.size() == 0){
+                answer = 65536;
+            } else {
+                answer = (int)(((double)intersectionList.size() / (double)firstList.size())) * 65536;    
+            }
             
-            answer = (int)Math.round((((double)intersectionList.size() / (double)firstList.size())) * 65536);
             
             return answer;
         }
