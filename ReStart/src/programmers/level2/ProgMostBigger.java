@@ -1,6 +1,7 @@
 package programmers.level2;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.stream.*;
 
 
@@ -28,7 +29,7 @@ public class ProgMostBigger {
 
     public static void main(String[] args) {
         ProgMostBigger.Solution solution = new ProgMostBigger().new Solution();
-        int[] numbers = {10, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] numbers = {100,10};
         System.out.println(solution.solution(numbers));   
     }
 
@@ -38,8 +39,26 @@ public class ProgMostBigger {
             
             boolean[] visited = new boolean[numbers.length];
             int[] board = new int[numbers.length];
-            permutation(visited, numbers, board, 0, numbers.length);
-            return String.valueOf(biggerNum);
+            // permutation(visited, numbers, board, 0, numbers.length);
+            otherMethod(numbers);
+            return  otherMethod(numbers); // String.valueOf(biggerNum);
+        }
+
+        public String otherMethod(int[] numbers){
+            //생성자배열 메서드 참조는 어떻게 람다식으로 변환하는지 모르겠네
+            String[] stream = Arrays.stream(numbers).mapToObj(v -> String.valueOf(v)).toArray(String[]::new); 
+
+            Arrays.sort(stream, new Comparator<String>(){
+                @Override
+                public int compare(String o1, String o2) {
+                    return (o2+o1).compareTo(o1+o2);
+                }
+                
+            });
+
+            String result = Arrays.stream(stream).collect(Collectors.joining());
+            
+            return result.charAt(0) == '0' ? "0" : result;
         }
 
         public void permutation(boolean[] visited, int[] numbers, int[] board, int depth, int size){
