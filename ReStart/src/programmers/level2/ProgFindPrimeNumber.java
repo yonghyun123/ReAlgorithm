@@ -41,7 +41,7 @@ public class ProgFindPrimeNumber {
     }
 
     class Solution {
-        public int answer = 0;
+        
         public Set<Integer> resultSet = new HashSet<>();
         public int solution(String numbers) {
             
