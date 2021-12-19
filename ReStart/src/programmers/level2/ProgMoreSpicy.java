@@ -26,6 +26,9 @@ public class ProgMoreSpicy {
             // 조건을 Stream으로 만들면 아주 좋다.
 
             while(inputList.peek() < K){
+                if (inputList.size() == 1) {
+                    return -1;
+                }
                 int first = inputList.peek();
                 inputList.poll();
 
