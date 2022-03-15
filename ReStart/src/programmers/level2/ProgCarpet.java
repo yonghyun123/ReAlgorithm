@@ -37,6 +37,7 @@ public class ProgCarpet {
                 if( (row - 2) * (col - 2) == yellow){
                     answer[0] = col;
                     answer[1] = row;
+                    break;
                 }
             }
 
