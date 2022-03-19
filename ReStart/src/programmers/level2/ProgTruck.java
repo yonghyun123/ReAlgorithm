@@ -39,16 +39,11 @@ public class ProgTruck {
                         runningQ.add(waitingQ.peek());
                         waitingQ.poll();
                     } 
-                    for(TruckInfo item: runningQ){
-                        item.setOnTime(item.getOnTime()-1);
-                    }
-                    passTime += 1;
-                } else {
-                    for(TruckInfo item: runningQ){
-                        item.setOnTime(item.getOnTime()-1);
-                    }
-                    passTime += 1;
+                } 
+                for(TruckInfo item: runningQ){
+                    item.setOnTime(item.getOnTime()-1);
                 }
+                passTime += 1;
             }
 
             return passTime;
