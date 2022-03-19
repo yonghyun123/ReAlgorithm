@@ -89,16 +89,7 @@ public class ProgRankSearch {
                 }
                 resultIdx += 1;
             }
-            
-            for(int i = 0; i < answer.length; i++){
-                System.out.print(answer[i] + ", ");
-            }
-
-            System.out.println(inputRank);
-            System.out.println();
-            System.out.println(resultRank);
-
-
+        
             return answer;
         }
     }
