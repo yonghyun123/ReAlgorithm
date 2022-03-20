@@ -23,15 +23,23 @@ public class Ex01 {
      */
     public static void main(String[] args) {
         Ex01.Solution solution = new Ex01().new Solution();
-        int n = 4;
-        int k = 10;
+        int n = 6;
+        int k = 17;
         int [][]roads= {
-            {0,1,2},
-            {0,2,3}
+            {5,4,6},
+            {5,2,5},
+            {0,4,2},
+            {2,3,3},
+            {1,2,7},
+            {0,1,3}
         };
 
         
-        System.out.println(solution.solution(n, k, roads)[0] + ", "+ solution.solution(n, k, roads)[1]);
+        int []result = solution.solution(n, k, roads);
+        for(int i = 0; i < result.length; i++){
+            System.out.print(result[i] + " ");
+        }
+        
     }
 
     class Solution{
@@ -95,7 +103,9 @@ public class Ex01 {
                         q.add(nextPosInfo);
                     }
                     else if(nextTime == limitTime){
+                        if(resultSet.contains(nextNode)) continue;
                         resultSet.add(nextNode);
+                        
                     } 
                 }
             }
