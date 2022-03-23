@@ -1,12 +1,10 @@
 package kakaobank;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-
 /**
  * 로드 밸런싱(Load Balancing)이란 여러 대의 서버에 사용자 요청을 분산하는 네트워크 기술입니다. 대표적인 로드 밸런싱 알고리즘은 다음과 같습니다.
 
@@ -94,9 +92,9 @@ Least Connection의 경우 각 요청이 다음과 같이 분배됩니다:
 
 Least Connection(12:00:01.300)이 Round Robin(12:00:01.700)보다 0.4초(400ms) 빠르므로 [2, 400]을 반환합니다.
  */
-public class Ex03 {
+public class Ex03Re {
     public static void main(String[] args) {
-        Ex03.Solution solution = new Ex03().new Solution();
+        Ex03Re.Solution solution = new Ex03Re().new Solution();
         int numServer = 2;
         String[] logs = {
             "12:00:00.100 0.400",
@@ -108,7 +106,6 @@ public class Ex03 {
         };
 
         solution.solution(numServer, logs);
-
     }
 
     class Solution {
@@ -129,13 +126,78 @@ public class Ex03 {
 
             //첫번째 서버에 로그를 넣어두고 탐색시작
             int idx = 0;
-            int loop = 0;
             String current = inputLogList.get(idx)[0];
             serverList.get(idx).add(inputLogList.get(idx));
 
             inputLogList.remove(0);//대기 로그에 첫번째 항목 지움.
             //round robin
+            // idx += 1;
+            // while(!serverList.isEmpty()){
+                
+            //     String nextTime = increaseTime(current,1); //다음 시간을 받아옴
+            //     current = nextTime;
+            //     if(!inputLogList.isEmpty()){
+            //         //다음로그가 큐에 들어가야함
+                    
+            //         if(inputLogList.get(0)[0].equals(current)){
+            //             System.out.println("Add Q="+inputLogList.get(0)[0]+ ", currTime=" + current);
+            //             serverList.get(idx % numServer).add(inputLogList.get(0));
+            //             //대기중인 로그 지우기
+            //             inputLogList.remove(0);
+            //             //다음 라운드로빈을 위함
+            //             idx += 1;
+            //         }
+            //     }
+
+            //     //큐에 들어가있는것중 
+            //     for(Queue<String[]> q : serverList){
+            //         if(!q.isEmpty()){
+            //             String requestTimeFirst = q.peek()[1].substring(0, 1);
+            //             String requestTimeSecond = q.peek()[1].substring(2, 5);
+    
+            //             String requestTime = requestTimeFirst + requestTimeSecond;
+            //             String predTime = increaseTime(q.peek()[0], Integer.parseInt(requestTime));
+            //             // System.out.println(predTime +", "+ current);
+            //             if(predTime.equals(current)){
+            //                 System.out.println("Q out" + q.peek()[0] + ", " + q.peek()[1] + "currTime= " + current);
+            //                 q.poll();
+            //                 if(!q.isEmpty()){
+            //                     q.peek()[0] = current;
+            //                 }
+                            
+            //             }
+            //         }
+                   
+            //     }
+                
+            //     for(int i = 0; i < serverList.size(); i++){
+            //         if(serverList.get(i).isEmpty() && inputLogList.isEmpty()){
+            //             serverList.remove(i);
+            //         } 
+            //     }
+            // }
+
+            //least connection
+            inputLogList = new ArrayList<>();
+            serverList = new ArrayList<>();
+
+            for (int i = 0; i < logs.length; i++) {
+                String[] timeInfo = {logs[i].split(" ")[0],logs[i].split(" ")[1]};                
+                inputLogList.add(timeInfo);
+            }
+
+            for(int i = 0; i <  numServer; i++){
+                Queue<String[]> server = new LinkedList<>();
+                serverList.add(server); //서버 생성
+            }
+            
+            idx = 0;
+            current = inputLogList.get(idx)[0];
+            serverList.get(idx).add(inputLogList.get(idx));
+
+            inputLogList.remove(0);//대기 로그에 첫번째 항목 지움.
             idx += 1;
+
             while(!serverList.isEmpty()){
                 
                 String nextTime = increaseTime(current,1); //다음 시간을 받아옴
@@ -144,7 +206,17 @@ public class Ex03 {
                     //다음로그가 큐에 들어가야함
                     
                     if(inputLogList.get(0)[0].equals(current)){
-                        serverList.get(idx % numServer).add(inputLogList.get(0));
+                        System.out.println("Add Q="+inputLogList.get(0)[0]+ ", currTime=" + current);
+                        //least conenction
+                        int leastCnt = Integer.MAX_VALUE;
+                        int serverIdx = -1;
+                        for(int i =  serverList.size()-1; i >= 0; i--){
+                            if(leastCnt > serverList.get(i).size()){
+                                leastCnt = Math.min(leastCnt, serverList.get(i).size());
+                                serverIdx = i;
+                            }
+                        }
+                        serverList.get(serverIdx).add(inputLogList.get(0));
                         //대기중인 로그 지우기
                         inputLogList.remove(0);
                         //다음 라운드로빈을 위함
@@ -159,25 +231,26 @@ public class Ex03 {
                         String requestTimeSecond = q.peek()[1].substring(2, 5);
     
                         String requestTime = requestTimeFirst + requestTimeSecond;
-                        System.out.println("requestTime" + requestTime);
                         String predTime = increaseTime(q.peek()[0], Integer.parseInt(requestTime));
-                        System.out.println(predTime +", "+ current);
-                        if(predTime == current){
+                        // System.out.println(predTime +", "+ current);
+                        if(predTime.equals(current)){
+                            System.out.println("Q out" + q.peek()[0] + ", " + q.peek()[1] + "currTime= " + current);
                             q.poll();
+                            if(!q.isEmpty()){
+                                q.peek()[0] = current;
+                            }
+                            
                         }
                     }
                    
                 }
                 
-                for(Queue<String[]> server : serverList){
-                    //대기큐에 로그가 없구 서버에 큐도 없으면 지움
-                    if(server.isEmpty() && inputLogList.isEmpty()) serverList.remove(server);
+                for(int i = 0; i < serverList.size(); i++){
+                    if(serverList.get(i).isEmpty() && inputLogList.isEmpty()){
+                        serverList.remove(i);
+                    } 
                 }
-                loop += 1;
-
-                 if(loop == 500) break;               
             }
-            
 
             return answer;
         }
@@ -231,11 +304,9 @@ public class Ex03 {
             return nextTime;
         }
 
-        public void showList(List<Map<String,String>> inputLogList){
-            for(Map<String,String> map : inputLogList){
-                for(String key : map.keySet()){
-                    System.out.println("key = " + key + ", value = "+ map.get(key));
-                }
+        public void showList(List<Queue<String[]>> inputLogList){
+            for(Queue<String[]> item : inputLogList){
+                System.out.println(item.peek()[0] + ", " + item.peek()[1]);
             }
         }
     }

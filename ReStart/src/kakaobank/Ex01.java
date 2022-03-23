@@ -68,8 +68,8 @@ money	limit	result
 public class Ex01 {
     public static void main(String[] args) {
         Ex01.Solution solution = new Ex01().new Solution();
-        int money = 4;
-        int limit = 4;
+        int money = 3;
+        int limit = 5;
 
         solution.solution(money, limit);
 
@@ -100,10 +100,12 @@ public class Ex01 {
                     } 
                     trueCnt += 1;
                     money -= limit;
+                
                     if(isDouble){
                         break;
-                    }
+                    }  
                     isDouble = true;
+                    
                 }
                 idx += 1;
             }

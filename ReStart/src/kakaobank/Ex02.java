@@ -12,8 +12,8 @@ public class Ex02 {
     public static void main(String[] args) {
         Ex02.Solution solution = new Ex02().new Solution();
 
-        String[] before = {"A", "B", "C"};
-        String[] after = {"D", "E", "C"};
+        String[] before = {"A", "B", "C", "D"};
+        String[] after = {"B", "Z", "D", "C"};
         System.out.println(solution.solution(before, after)); 
         //A B C D
         //A Z C D
